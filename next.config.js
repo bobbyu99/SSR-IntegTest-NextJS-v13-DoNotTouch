@@ -57,6 +57,10 @@ module.exports = {
         source: "/rewrite",
         destination: "/",
       },
+      {
+        source: '/.omega/hello',
+        destination: '/omega/hello',
+      },
     ];
   },
   async headers() {
