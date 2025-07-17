@@ -6,7 +6,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context; // Access the incoming request object
 
   // Access specific headers using req.headers
-  const identity = (req.headers['x-omega-authn-identity'] as string) || '<<missing>>'; // Identity token from Compute Origin
+  const identity = (req.headers['x-omega-chauthn-identity'] as string) || '<<missing>>'; // Identity token from Compute Origin
 
   console.log('🔥 SSR - propagated identity token:', identity);
 
@@ -18,10 +18,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }; 
 
-const OmegaHello: NextPage = () => (
+const OmegaHello: NextPage<{ identity: string }> = ({ identity }) => (
   <div style={{ fontFamily: 'system-ui, sans-serif', padding: 20 }}>
     <h1>👋 Hello from /.omega/hello</h1>
     <p>This route is now served by Next as <code>/.omega/hello</code>.</p>
+    <p>Identity token: {identity}</p>
   </div>
 )
 
