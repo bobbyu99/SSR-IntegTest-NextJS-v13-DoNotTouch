@@ -1,18 +1,15 @@
-// pages/omega/hello.tsx
 import { NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next'
 
 const HEADER_X_AMPLIFY_AUTHN_IDENTITY = 'x-amplify-authn-identity'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { req } = context; // Access the incoming request object
+  const { req } = context;
 
-  // Access specific headers using req.headers
-  const identity = (req.headers[HEADER_X_AMPLIFY_AUTHN_IDENTITY] as string) || '<<missing>>'; // Identity token from Compute Origin
+  const identity = (req.headers[HEADER_X_AMPLIFY_AUTHN_IDENTITY] as string) || '<<missing>>';
 
   console.log('🔥 SSR - propagated identity token:', identity);
-
-  // You can then use these headers in your page logic or pass them as props
+  
   return {
     props: {
       identity,
