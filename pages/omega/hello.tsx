@@ -2,11 +2,13 @@
 import { NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next'
 
+const HEADER_X_AMPLIFY_AUTHN_IDENTITY = 'x-amplify-authn-identity'
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context; // Access the incoming request object
 
   // Access specific headers using req.headers
-  const identity = (req.headers['x-omega-chauthn-identity'] as string) || '<<missing>>'; // Identity token from Compute Origin
+  const identity = (req.headers[HEADER_X_AMPLIFY_AUTHN_IDENTITY] as string) || '<<missing>>'; // Identity token from Compute Origin
 
   console.log('🔥 SSR - propagated identity token:', identity);
 
