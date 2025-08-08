@@ -23,6 +23,11 @@ interface OidcUserIdentity {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+
+  // ⬇️ sleep 31s to trigger the HTTP client timeout
+  const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
+  await sleep(31_000);
+
   const { req } = context;
 
   const encodedIdentity = (req.headers[HEADER_X_AMPLIFY_AUTHN_IDENTITY] as string) || '<<missing>>';
